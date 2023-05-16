@@ -43,9 +43,29 @@ function send500(response, error) {
   response.end();
 }
 
+const data = [
+  {
+    id: '1',
+    name: 'Pavel Malokhatko',
+    status: 'Online'
+  },
+]
+
+function sendList(response) {
+  response.writeHead(200, {'Content-Type': 'text/plain'});
+  response.write(JSON.stringify(data));
+  response.end();
+}
+
 const server = http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url, `http://${request.headers.host}/`);
+
+    if (url.pathname === '/list') {
+      sendList(response);
+      return;
+    }
+
     serveStatic(url.pathname === '/' ? '/index.html' : url.pathname, response)
   } catch (error) {
     send500(response, error);
