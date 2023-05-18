@@ -16,5 +16,7 @@ function formatString(employee) {
 }
 
 function formatContent(employees) {
-  return employees.map(item => formatString(item)).join('\n');
+  return `<a href="/addEmployee">New</a>
+
+${employees.map(item => formatString(item)).join('\n')}`;
 }
