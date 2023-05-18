@@ -15,6 +15,19 @@ const employees = [
   }
 ];
 
+
+let nextId = 2;
+
 exports.getEmployees = function getEmployees() {
   return employees;
+}
+
+exports.addEmployee = function (employee) {
+  employees.push({
+    id: nextId++,
+    name: employee.name,
+    birthYear: employee.birthYear,
+    salary: employee.salary,
+    title: employee.title
+  });
 }
