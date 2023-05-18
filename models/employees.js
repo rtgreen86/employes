@@ -15,11 +15,21 @@ const employees = [
   }
 ];
 
-
 let nextId = 2;
 
-exports.getEmployees = function getEmployees() {
-  return employees;
+exports.getEmployees = function getEmployees(query) {
+  if (!query || typeof query !== 'string') {
+    return employees;
+  }
+  return employees.filter(item => {
+    if (item.name && item.name.toLowerCase().includes(query.toLowerCase())) {
+      return true;
+    }
+    if (item.title && item.title.toLowerCase().includes(query.toLowerCase())) {
+      return true;
+    }
+    return false;
+  });
 }
 
 exports.addEmployee = function (employee) {

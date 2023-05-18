@@ -5,11 +5,11 @@ const addEmployee = require('./controllers/addEmployee');
 const notFound = require('./controllers/404');
 
 const server = http.createServer((req, res) => {
-  if (req.url === '/addEmployee') {
+  if (req.url.startsWith('/addEmployee')) {
     addEmployee.handle(req, res);
     return;
   }
-  if (req.url === '/') {
+  if (req.url === '/' || req.url.startsWith('/?')) {
     employees.handle(req, res);
     return;
   }
