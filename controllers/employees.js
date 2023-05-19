@@ -5,25 +5,6 @@ const employees = require('../models/employees');
 const template = require('../views/default');
 
 exports.handle = function (req, res) {
-  switch(req.method) {
-    case 'POST': return handlePost(req, res);
-    default: return handleGet(req, res);
-  }
-}
-
-function handlePost(req, res) {
-  const chunks = [];
-  req.setEncoding('utf8');
-  req.on('data', chunk => chunks.push(chunk));
-  req.on('end', () => {
-    const query = chunks.join('');
-    const employee = querystring.parse(query);
-    employees.addEmployee(employee);
-    handleGet(req, res);
-  });
-}
-
-function handleGet(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}/`);
   const query = url.searchParams.get('search');
   const emplList = employees.getEmployees(query);

@@ -32,6 +32,10 @@ exports.getEmployees = function getEmployees(query) {
   });
 }
 
+exports.getEmployee = function getEmployee(id) {
+  return employees.find(empl => empl.id === id);
+}
+
 exports.addEmployee = function (employee) {
   employees.push({
     id: nextId++,
