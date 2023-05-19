@@ -16,7 +16,7 @@ exports.handle = function (req, res) {
 }
 
 function formatString(employee) {
-  return Object.values(employee).join('\t');
+  return Object.values(employee).join('\t') + ` <a href=/employee?id=${employee.id}>Details</a>`;
 }
 
 function formatContent(query, employees) {

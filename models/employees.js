@@ -36,6 +36,21 @@ exports.getEmployee = function getEmployee(id) {
   return employees.find(empl => empl.id === id);
 }
 
+exports.updateEmployee = function updateEmployee(employee) {
+  if (!employee || typeof employee.id !== 'number') {
+    return false;
+  }
+  const savedEmpl = exports.getEmployee(employee.id);
+  if (!savedEmpl) {
+    return false;
+  }
+  for (const [key, value] of Object.entries(employee)) {
+    if (key === 'id') continue;
+    savedEmpl[key] = value;
+  }
+  return true;
+}
+
 exports.addEmployee = function (employee) {
   employees.push({
     id: nextId++,

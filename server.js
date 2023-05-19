@@ -2,11 +2,16 @@ const http = require('node:http');
 
 const employees = require('./controllers/employees');
 const addEmployee = require('./controllers/addEmployee');
+const employee = require('./controllers/employee');
 const notFound = require('./controllers/404');
 
 const server = http.createServer((req, res) => {
   if (req.url.startsWith('/addEmployee')) {
     addEmployee.handle(req, res);
+    return;
+  }
+  if (req.url.startsWith('/employee')) {
+    employee.handle(req, res);
     return;
   }
   if (req.url === '/' || req.url.startsWith('/?')) {
