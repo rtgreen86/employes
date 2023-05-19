@@ -3,7 +3,7 @@ const http = require('node:http');
 const employees = require('./controllers/employees');
 const addEmployee = require('./controllers/addEmployee');
 const employee = require('./controllers/employee');
-const notFound = require('./controllers/404');
+const staticServer = require('./staticServer');
 
 const server = http.createServer((req, res) => {
   if (req.url.startsWith('/addEmployee')) {
@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
     employees.handle(req, res);
     return;
   }
-  notFound.handle(req, res);
+  staticServer.handle(req, res);
 });
 
 server.listen(3000, () => {

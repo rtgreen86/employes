@@ -7,6 +7,7 @@ module.exports = (title, content) => `<!DOCTYPE html>
   <title>${title}</title>
 </head>
 <body>
+  <div><img src="/logo.png" alt="logo" width="200" height="32"></div>
   <pre>${content}</pre>
 </body>
 </html>`;
