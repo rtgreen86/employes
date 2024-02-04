@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env DEBUG=employees:* & node ./bin/www",
-    "jest": "jest"
+    "jest": "jest",
+    "create-database": "node scripts/create-database"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
