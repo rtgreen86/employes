@@ -1,9 +1,9 @@
 {
-  "name": "employes",
+  "name": "employees",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env DEBUG=employes:* & node ./bin/www",
+    "start": "cross-env DEBUG=employees:* & node ./bin/www",
     "jest": "jest"
   },
   "dependencies": {
