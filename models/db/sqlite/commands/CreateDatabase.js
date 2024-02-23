@@ -1,14 +1,11 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const db = require('../db');
+const provider = require('../provider');
+const { Query } = require('../../../../lib/orm');
 
 module.exports = class CreateDatabase {
-  #db = db;
-
-  #pathToSql = path.join(__dirname, '..', 'initdb.sql');
-
   async execute() {
-    const sql = await fs.readFile(this.#pathToSql, 'utf8');
-    await this.#db.exec(sql);
+    const sql = await fs.readFile(path.join(__dirname, 'CreateDatabase.sql'), 'utf8');
+    return new Query(provider, 'exec', sql).run();
   }
 }
