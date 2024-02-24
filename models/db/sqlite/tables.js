@@ -1,38 +1,38 @@
 const { Table } = require('../../../lib/orm');
 const provider = require('./provider');
 
-exports.employees = new Table(provider, {
-  insert: 'INSERT INTO employees (firstName, lastName, photo, notes) VALUES ($firstName, $lastName, $photo, $notes)',
-  delete: 'DELETE FROM employees WHERE id = $id',
-  select: 'SELECT * FROM employees WHERE id = $id'
+exports.Users = new Table(provider, {
+  insert: 'INSERT INTO Users (Login, Password, FirstName, LastName) VALUES ($Login, $Password, $FirstName, $LastName)',
+  select: 'SELECT * FROM Users WHERE Id = $Id',
+  delete: 'DELETE FROM Users WHERE Id = $Id',
 });
 
-exports.users = new Table(provider, {
-  insert: 'INSERT INTO users (login, password, employee) VALUES ($login, $password, $employee)',
-  delete: 'DELETE FROM users WHERE id = $id',
-  select: 'SELECT * FROM users WHERE id = $id'
+exports.Employees = new Table(provider, {
+  insert: 'INSERT INTO Employees (FirstName, LastName, Photo) VALUES ($FirstName, $LastName, $Photo)',
+  select: 'SELECT * FROM Employees WHERE Id = $Id',
+  delete: 'DELETE FROM Employees WHERE Id = $Id',
 });
 
-exports.departments = new Table(provider, {
-  insert: 'INSERT INTO departments (name, description) VALUES ($name, $description)',
-  delete: 'DELETE FROM departments WHERE id = $id',
-  select: 'SELECT * FROM departments WHERE id = $id'
+exports.Departments = new Table(provider, {
+  insert: 'INSERT INTO Departments (Name, Description) VALUES ($Name, $Description)',
+  select: 'SELECT * FROM Departments WHERE Id = $Id',
+  delete: 'DELETE FROM Departments WHERE Id = $Id',
 });
 
-exports.department_employees = new Table(provider, {
-  insert: 'INSERT INTO department_employees (department, employee) VALUES ($department, $employee)',
-  delete: 'DELETE FROM department_employees WHERE department = $department AND employee = $employee',
-  select: 'SELECT * FROM department_employees WHERE department = $department AND employee = $employee'
+exports.DepartmentEmployees = new Table(provider, {
+  insert: 'INSERT INTO DepartmentEmployees (Department, Employee) VALUES ($Department, $Employee)',
+  select: 'SELECT * FROM DepartmentEmployees WHERE Department = $Department AND Employee = $Employee',
+  delete: 'DELETE FROM DepartmentEmployees WHERE Department = $Department AND Employee = $Employee',
 });
 
-exports.messages = new Table(provider, {
-  insert: 'INSERT INTO messages (sender, recipient, date, subject, text) VALUES ($sender, $recipient, $date, $subject, $text)',
-  delete: 'DELETE FROM messages WHERE id = $id',
-  select: 'SELECT * FROM messages WHERE id = $id'
+exports.Notes = new Table(provider, {
+  insert: 'INSERT INTO Notes (Author, Employee, Date, Text) VALUES ($Author, $Employee, $Date, $Text)',
+  select: 'SELECT * FROM Notes WHERE Id = $Id',
+  delete: 'DELETE FROM Notes WHERE Id = $Id',
 });
 
-exports.images = new Table(provider, {
-  insert: 'INSERT INTO images (owner, date, caption, size, path) VALUES ($owner, $date, $caption, $size, $path)',
-  delete: 'DELETE FROM images WHERE id = $id',
-  select: 'SELECT * FROM images WHERE id = $id'
+exports.Images = new Table(provider, {
+  insert: 'INSERT INTO Images (Author, Date, Caption, Size, Path) VALUES ($Author, $Date, $Caption, $Size, $Path)',
+  select: 'SELECT * FROM Images WHERE Id = $Id',
+  delete: 'DELETE FROM Images WHERE Id = $Id',
 });

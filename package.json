@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env DEBUG=employees:* & node ./bin/www",
-    "create-database": "node scripts/create-database.mjs",
+    "create-database": "node scripts/create-database.js",
     "test": "jest"
   },
   "dependencies": {
