@@ -60,4 +60,20 @@ describe('User', () => {
   it('should return null if no user with requested login', async () => {
     await expect(User.getByLogin('kjen')).resolves.toBe(null);
   });
+
+  describe('validateAndGet', () => {
+    it('should validate user with correct password', async () => {
+      await expect(User.validateAndGet('jkirk', 'password')).resolves.toEqual({
+        id,
+        login: user.login,
+        password: expect.any(String),
+        firstName: user.firstName,
+        lastName: user.lastName,
+      });
+    });
+
+    it('should not validate user with wrong password', async () => {
+      await expect(User.validateAndGet('jkirk', 'wrong-password')).resolves.toEqual(null);
+    });
+  });
 });

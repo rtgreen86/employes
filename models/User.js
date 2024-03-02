@@ -63,4 +63,10 @@ module.exports = class User {
     if (!user) return null;
     return User.createFromDb(user);
   }
+
+  static async validateAndGet(login, password) {
+    const user = await User.getByLogin(login);
+    const result = await bcrypt.compare(password, user.password);
+    return result ? user : null;
+  }
 }
