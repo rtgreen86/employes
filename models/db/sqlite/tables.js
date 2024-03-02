@@ -10,6 +10,8 @@ exports.Users = new Table(provider, {
 exports.Employees = new Table(provider, {
   insert: 'INSERT INTO Employees (FirstName, LastName, Photo) VALUES ($FirstName, $LastName, $Photo)',
   select: 'SELECT * FROM Employees WHERE Id = $Id',
+  selectAll: 'SELECT * FROM Employees',
+  update: 'UPDATE Employees SET FirstName = $FirstName, LastName = $LastName WHERE Id = $Id',
   delete: 'DELETE FROM Employees WHERE Id = $Id',
 });
 

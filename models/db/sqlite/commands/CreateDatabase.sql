@@ -60,3 +60,10 @@ VALUES
   (0, 'Account', 'Account Department'),
   (1, 'HR', 'Human Resources Department'),
   (2, 'IT', 'Information Technology Department');
+
+INSERT OR IGNORE INTO Employees
+  (FirstName, LastName)
+VALUES
+  ('James T.', 'Kirk'),
+  ('Kathryn', 'Janeway'),
+  ('Jean-Luc', 'Picard');

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div><a href="/employees">&lt;&lt;&nbsp;list</a></div>
+    <section>
+      <h3><%= employee.firstName %> <%= employee.lastName %></h3>
+    </section>
+    <section>
+      <form method="POST" action="/employees/delete"><input type="hidden" name="id" value="<%= employee.id %>"><input type="submit" value="delete"></form>
+    </section>
+  </body>
+</html>
