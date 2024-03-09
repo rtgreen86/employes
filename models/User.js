@@ -1,4 +1,5 @@
 const { tables, queries } = require('./db');
+const { uncapitalizeProps } = require('./utils');
 const bcrypt = require('bcrypt');
 
 module.exports = class User {
@@ -17,51 +18,30 @@ module.exports = class User {
       return this.update();
     }
     await this.hashPassword();
-    this.id = await tables.Users.insert({
-      Login: this.login,
-      Password: this.password,
-      FirstName: this.firstName,
-      LastName: this.lastName,
-    });
+    this.id = await tables.Users.insert(this);
     return this;
   }
 
   async update() {
-    await tables.Users.update({
-      Id: this.id,
-      Login: this.login,
-      Password: this.password,
-      FirstName: this.firstName,
-      LastName: this.lastName,
-    });
+    await tables.Users.update(this);
     return this;
   }
 
   async delete() {
-    await tables.Users.delete({ Id: this.id });
+    await tables.Users.delete(this);
     return this;
-  }
-
-  static createFromDb(record) {
-    return new User({
-      id: record.Id,
-      login: record.Login,
-      password: record.Password,
-      firstName: record.FirstName,
-      lastName: record.LastName,
-    });
   }
 
   static async getById(id) {
     const user = await tables.Users.select({ Id: id });
     if (!user) return null;
-    return User.createFromDb(user);
+    return new User(uncapitalizeProps(user));
   }
 
   static async getByLogin(login) {
-    const user = await queries.getUserByLogin.run({login});
+    const user = await queries.GetUserByLogin.run({login});
     if (!user) return null;
-    return User.createFromDb(user);
+    return new User(uncapitalizeProps(user));
   }
 
   static async validateAndGet(login, password) {

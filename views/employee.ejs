@@ -9,6 +9,7 @@
     <div><a href="/employees">&lt;&lt;&nbsp;list</a></div>
     <section>
       <h3><%= employee.firstName %> <%= employee.lastName %></h3>
+      <div>Departments: <span><%= employee.departments.map(dep => dep.name).join(', '); %></span> </div>
     </section>
     <section>
       <form method="POST" action="/employees/delete"><input type="hidden" name="id" value="<%= employee.id %>"><input type="submit" value="delete"></form>

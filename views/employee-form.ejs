@@ -1,19 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <%
-      var employee;
-    %>
-    <h1><%= title %></h1>
-    <form method="POST" action="/employees/save">
-      <input type="hidden" name="id" value="<%= employee?.id %>" />
-      <label>First Name: <input name="firstName" value="<%= employee?.firstName %>" /></label>
-      <label>Last Name: <input name="lastName" value="<%= employee?.lastName %>" /></label>
-      <input type="submit" />
+<%- include('header') -%>
+
+<% var employee, departments; %>
+
+<h1><%= title %></h1>
+
+<section>
+    <form method="POST" action="/employees/edit">
+        <input type="hidden" name="id" value="<%= employee?.id %>"/>
+        <div>
+            <label>First Name: <input name="firstName" value="<%= employee?.firstName %>"/></label>
+            <label>Last Name: <input name="lastName" value="<%= employee?.lastName %>"/></label>
+        </div>
+        <div>
+            <label>
+                Change department:
+                <select name="department">
+                    <% departments.forEach(function (entry) { %>
+                        <option value="<%= entry.id %>"><%= entry.name %></option>
+                    <% }) %>
+                </select>
+            </label>
+        </div>
+        <input type="submit"/>
     </form>
-  </body>
-</html>
+</section>
+
+<%- include('footer') -%>

@@ -1,5 +1,6 @@
 const express = require('express');
 const Employee = require('../models/Employee');
+const Department = require('../models/Department');
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/details/:id', async (req, res) => {
   const id = parseInt(req.params.id, 10);
   const employee = await Employee.getById(id);
+  await employee.getDepartments();
 
   res.render('employee', {
     title: 'Employee',
@@ -22,27 +24,46 @@ router.get('/details/:id', async (req, res) => {
   })
 });
 
-router.get('/new', async (req, res) => {
-  res.render('employee-form', {
-    title: 'Add Employee'
-  });
-});
+router.get('/edit/:id?', async (req, res) => {
+  const id = req.params.id
+    ? parseInt(req.params.id, 10)
+    : null;
 
-router.get('/edit/:id', async (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const employee = await Employee.getById(id);
+  const employee = id
+    ? await Employee.getById(id)
+    : {};
+
+  const title = id
+    ? 'Edit Employee'
+    : 'New Employee';
+
+  const departments = [
+    { id: '', name: 'None' },
+    ...await Department.list()
+  ];
+
   res.render('employee-form', {
-    title: 'Edit Employee',
+    title,
     employee,
+    departments
   });
 });
 
-router.post('/save', async (req, res) => {
-  await new Employee({
+router.post('/edit', async (req, res) => {
+  const employee = new Employee({
     id: req.body.id || undefined,
     firstName: req.body.firstName,
     lastName: req.body.lastName
-  }).save();
+  });
+  await employee.save();
+
+  const departments = [];
+  const departmentId = parseInt(req.body.department, 10);
+  if (!isNaN(departmentId)) {
+    departments.push({ id: departmentId });
+  }
+  await employee.getDepartments();
+  await employee.updateDepartments(departments);
 
   res.redirect('/employees');
 });

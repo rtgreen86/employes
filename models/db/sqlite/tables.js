@@ -19,6 +19,7 @@ exports.Departments = new Table(provider, {
   insert: 'INSERT INTO Departments (Name, Description) VALUES ($Name, $Description)',
   select: 'SELECT * FROM Departments WHERE Id = $Id',
   delete: 'DELETE FROM Departments WHERE Id = $Id',
+  selectAll: 'SELECT * FROM Departments',
 });
 
 exports.DepartmentEmployees = new Table(provider, {
