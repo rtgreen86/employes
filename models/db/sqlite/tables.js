@@ -37,5 +37,6 @@ exports.Notes = new Table(provider, {
 exports.Images = new Table(provider, {
   insert: 'INSERT INTO Images (Author, Date, Caption, Size, Path) VALUES ($Author, $Date, $Caption, $Size, $Path)',
   select: 'SELECT * FROM Images WHERE Id = $Id',
+  selectAll: 'SELECT * FROM Images',
   delete: 'DELETE FROM Images WHERE Id = $Id',
 });

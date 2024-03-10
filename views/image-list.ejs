@@ -1,0 +1,11 @@
+<%- include('header') -%>
+
+<% var images; %>
+
+<h1><%= title %></h1>
+
+<% images.forEach((image) => { %>
+    <div><img src="/photos/<%= image.path %>" alt="<%= image.path %>"></div>
+<% }); %>
+
+<%- include('footer') -%>

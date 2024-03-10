@@ -9,6 +9,7 @@ const { provider } = require('./models/db');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const employeesRouter = require('./routes/employees');
+const imagesRouter = require('./routes/images');
 
 const app = express();
 
@@ -17,6 +18,7 @@ provider.connection.open();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('images', __dirname + '/public/photos');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -27,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/employees', employeesRouter);
+app.use('/images', imagesRouter(app.get('images')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
